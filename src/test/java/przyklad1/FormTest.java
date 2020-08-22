@@ -22,7 +22,6 @@ public class FormTest {
         // Zmaksymalizuj okno przeglądarki
         driver.manage().window().maximize();
 
-        // Przejdź do Google
         driver.get("http://katalon-test.s3.amazonaws.com/demo-aut/dist/html/form.html");
     }
 
@@ -61,7 +60,7 @@ public class FormTest {
         }
     }
 
-    private void chooseGenderElement(){
+    private void chooseGenderElement() {
         //Nieodporne na zmiany, np. w kolejności wyświetlania elementów
 //        List<WebElement> genders = driver.findElements(By.name("gender"));
 //        genders.get(0).click(); //Male
@@ -102,7 +101,7 @@ public class FormTest {
         WebElement addressElement = driver.findElement(By.id("address"));
         WebElement addressHeader = driver.findElement(By.cssSelector("[for='address']"));
         String address = "Prosta 51";
-        if (addressElement.isEnabled()){
+        if (addressElement.isEnabled()) {
             addressElement.sendKeys(address);
             System.out.println(addressHeader.getText() + " : " + address);
         }
@@ -112,7 +111,7 @@ public class FormTest {
         WebElement emailElement = driver.findElement(By.id("email"));
         WebElement emailHeader = driver.findElement(By.cssSelector("[for='email']"));
         String email = "karol.kowalski@mailinator.com";
-        if (emailElement.isEnabled()){
+        if (emailElement.isEnabled()) {
             emailElement.sendKeys(email);
             System.out.println(emailHeader.getText() + " : " + email);
         }
@@ -122,7 +121,7 @@ public class FormTest {
         WebElement passwordElement = driver.findElement(By.id("password"));
         WebElement passwordHeader = driver.findElement(By.cssSelector("[for='password']"));
         String password = "Pass123";
-        if (passwordElement.isEnabled()){
+        if (passwordElement.isEnabled()) {
             passwordElement.sendKeys(password);
             System.out.println(passwordHeader.getText() + " : " + password);
         }
@@ -132,7 +131,7 @@ public class FormTest {
         WebElement companyElement = driver.findElement(By.id("company"));
         WebElement companyHeader = driver.findElement(By.cssSelector("[for='company']"));
         String company = "Coders Lab";
-        if (companyElement.isEnabled()){
+        if (companyElement.isEnabled()) {
             companyElement.sendKeys(company);
             System.out.println(companyHeader.getText() + " : " + company);
         }
@@ -147,7 +146,7 @@ public class FormTest {
         WebElement commentElement = driver.findElement(By.id("comment"));
         WebElement commentHeader = driver.findElement(By.cssSelector("[for='comment']"));
         String comment = "To jest mój pierwszy automat testowy";
-        if (commentElement.isEnabled()){
+        if (commentElement.isEnabled()) {
             commentElement.sendKeys(comment);
             System.out.println(commentHeader.getText() + " : " + comment);
         }

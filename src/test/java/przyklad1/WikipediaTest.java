@@ -23,12 +23,11 @@ public class WikipediaTest {
         // Zmaksymalizuj okno przeglądarki
         driver.manage().window().maximize();
 
-        // Przejdź do Google
         driver.get("https://pl.wikipedia.org/");
     }
 
     @Test
-    public void wikiTest(){
+    public void wikiTest() {
 
         // Metoda .getText()
 //        WebElement element = driver.findElement(By.id("main-page-column1"));
@@ -46,7 +45,7 @@ public class WikipediaTest {
         // .isEnabled()
         WebElement searchInputElement = driver.findElement(By.id("searchInput"));
 //        if (searchInputElement.isEnabled()){
-        if (searchInputElement.isDisplayed()){
+        if (searchInputElement.isDisplayed()) {
             searchInputElement.sendKeys("Selenium");
             searchInputElement.submit();
         } else {
