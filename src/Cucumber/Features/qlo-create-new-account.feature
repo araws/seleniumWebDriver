@@ -2,7 +2,7 @@ Feature: Account creation
   Scenario: Create an account
 
     Given User is on the authentication page
-    When user inputs sek into address field
+    When user inputs sdaas@rty.ui into address field
     And  user clicks Create an account button
     When user fills Stanislaw, Kowalski, admin1
     And user clicks Register button

@@ -1,8 +1,10 @@
 package bdd;
 
-import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
-import io.cucumber.java.en.When;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,7 +23,7 @@ public class QloAccountCreate {
 
         driver = new ChromeDriver();
 
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
         driver.manage().window().maximize();
 
@@ -49,5 +51,21 @@ public class QloAccountCreate {
         driver.findElement(By.id("customer_firstname")).sendKeys(firstName);
         driver.findElement(By.id("customer_lastname")).sendKeys(lastName);
         driver.findElement(By.id("passwd")).sendKeys(password);
+    }
+
+    @And("user clicks Register button")
+    public void userClicksRegisterButton() {
+        driver.findElement(By.id("submitAccount")).click();
+    }
+
+    @Then("success message appears")
+    public void successMessageAppears() {
+        WebElement messageElement = driver.findElement(By.cssSelector("[class='alert alert-success']"));
+        Assert.assertEquals("Your account has been created.", messageElement.getText());
+    }
+
+    @And("close browser")
+    public void closeBrowser() {
+        driver.quit();
     }
 }
