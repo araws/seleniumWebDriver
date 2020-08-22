@@ -1,9 +1,9 @@
 package przyklad1;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,7 +13,7 @@ public class WikipediaTest {
 
     private WebDriver driver;
 
-    @BeforeEach
+    @Before
     public void setUp() {
         // Uruchom nowy egzemplarz przeglądarki Chrome
         System.setProperty("webdriver.chrome.driver",
@@ -50,11 +50,11 @@ public class WikipediaTest {
             searchInputElement.sendKeys("Selenium");
             searchInputElement.submit();
         } else {
-            Assertions.fail();
+            Assert.fail();
         }
     }
 
-    @AfterEach
+    @After
     public void tearDown() throws Exception {
         // Zamknij przeglądarkę
         driver.quit();

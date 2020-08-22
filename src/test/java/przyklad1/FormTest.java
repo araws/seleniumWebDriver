@@ -1,7 +1,7 @@
 package przyklad1;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,7 +12,7 @@ public class FormTest {
 
     private WebDriver driver;
 
-    @BeforeEach
+    @Before
     public void setUp() {
         // Uruchom nowy egzemplarz przeglądarki Chrome
         System.setProperty("webdriver.chrome.driver",
