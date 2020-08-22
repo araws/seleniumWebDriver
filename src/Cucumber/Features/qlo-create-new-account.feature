@@ -1,4 +1,10 @@
 Feature: Account creation
   Scenario: Create an account
 
-    Given User is no the https://qloapps.coderslab.pl/pl/logowanie?back=my-account page
+    Given User is on the authentication page
+    When user inputs sek into address field
+    And  user clicks Create an account button
+    When user fills Stanislaw, Kowalski, admin1
+    And user clicks Register button
+    Then success message appears
+    And close browser
