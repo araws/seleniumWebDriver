@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 @RunWith(Cucumber.class)
 @CucumberOptions(
         features = "src/Cucumber/Features/qlo-create-new-account.feature",
-        plugin = {"pretty", "html:target/cucumber"}
+        plugin = {"pretty", "html:out"}
 )
 public class QloAccountCreateTest {
 

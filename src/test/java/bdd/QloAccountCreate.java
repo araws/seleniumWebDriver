@@ -4,6 +4,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import net.bytebuddy.utility.RandomString;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -31,11 +32,11 @@ public class QloAccountCreate {
 
     }
 
-    @When("user inputs (.*) into address field")
-    public void userInputsEmailIntoAddressField(String email) {
+    @When("user inputs email into address field")
+    public void userInputsEmailIntoAddressField() {
         WebElement emailField = driver.findElement(By.id("email_create"));
         emailField.click();
-        emailField.sendKeys(email);
+        emailField.sendKeys(randomEmail);
     }
 
     @And("user clicks Create an account button")
@@ -67,5 +68,10 @@ public class QloAccountCreate {
     @And("close browser")
     public void closeBrowser() {
         driver.quit();
+    }
+
+    String randomEmail = randomString() + "@o2.pl";
+    public String randomString() {
+        return RandomString.make(8);
     }
 }
