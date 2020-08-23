@@ -19,6 +19,11 @@ public class MyStoreTest {
 
     String[] names = {"zenon", "stefan", "franek", "andrzej", "michal", "piotr"};
     String[] lastNames = {"kowalski", "sosnowski", "nowak", "nowakowski"};
+    String[] addresses = {"majowa 1", "kwietniowa 2", "marcowa 3", "lutowa 4", "styczniowa 5"};
+    String[] postalCodes = {"44-100", "00-920", "41-800", "43-500", "42-200"};
+    String[] cities = {"gliwice", "warszawa", "zabrze", "wisla", "zory"};
+
+
 
 
     @Before
@@ -73,7 +78,32 @@ public class MyStoreTest {
         WebElement passwordElement = driver.findElement(By.name("password"));
         passwordElement.sendKeys(randomString());
 
+        WebElement saveButtonElement = driver.findElement(By.xpath("//*[@id='customer-form']/footer/button"));
+        saveButtonElement.click();
 
+        WebElement myAccountButton = driver.findElement(By.cssSelector("a span.hidden-sm-down"));
+        myAccountButton.click();
+
+        WebElement addAddressButtonElement = driver.findElement(By.xpath("//*[@id='address-link']/span"));
+        addAddressButtonElement.click();
+        Assert.assertEquals("New address", driver.findElement(By.cssSelector("header.page-header")).getText());
+
+        WebElement addressElement = driver.findElement(By.name("address1"));
+        addressElement.sendKeys(getRandomFromArray(addresses));
+
+        WebElement postalCodeElement = driver.findElement(By.name("postcode"));
+        postalCodeElement.sendKeys(getRandomFromArray(postalCodes));
+
+        WebElement cityElement = driver.findElement(By.name("city"));
+        cityElement.sendKeys(getRandomFromArray(cities));
+
+        WebElement countryListElement = driver.findElement(By.name("id_country"));
+        countryListElement.click();
+        countryListElement.sendKeys("u");
+
+        WebElement saveButtonElement2 = driver.findElement(By.xpath("//*[@id='content']/div/div/form/footer/button"));
+        saveButtonElement2.click();
+        Assert.assertEquals("Address successfully added!", driver.findElement(By.cssSelector("article.alert")).getText());
     }
 
     public String randomString() {
