@@ -1,5 +1,7 @@
 package mystore;
 
+import net.bytebuddy.utility.RandomString;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -12,6 +14,12 @@ import java.util.Random;
 public class MyStoreTest {
 
     private WebDriver driver;
+
+    String randomEmail = randomString() + "@o2.pl";
+
+    String[] names = {"zenon", "stefan", "franek", "andrzej", "michal", "piotr"};
+    String[] lastNames = {"kowalski", "sosnowski", "nowak", "nowakowski"};
+
 
     @Before
     public void setUp() {
@@ -41,5 +49,39 @@ public class MyStoreTest {
         String product = products[randomModuloProducts];
         searchBox.sendKeys(product);
         searchBox.submit();
+    }
+
+    @Test
+    public void createNewAccountTest() {
+        WebElement singInElement = driver.findElement(By.xpath("//*[@id='_desktop_user_info']/div/a/span"));
+        singInElement.click();
+        Assert.assertEquals("Log in to your account", driver.findElement(By.xpath("//*[@id='main']/header/h1")).getText());
+
+        WebElement createAccountElement = driver.findElement(By.xpath("//*[@id='content']/div/a"));
+        createAccountElement.click();
+        Assert.assertEquals("Create an account", driver.findElement(By.xpath("//*[@id='main']/header/h1")).getText());
+
+        WebElement firstNameElement = driver.findElement(By.name("firstname"));
+        firstNameElement.sendKeys(getRandomFromArray(names));
+
+        WebElement lastNameElement = driver.findElement(By.name("lastname"));
+        lastNameElement.sendKeys(getRandomFromArray(lastNames));
+
+        WebElement emailElement = driver.findElement(By.name("email"));
+        emailElement.sendKeys(randomEmail);
+
+        WebElement passwordElement = driver.findElement(By.name("password"));
+        passwordElement.sendKeys(randomString());
+
+
+    }
+
+    public String randomString() {
+        return RandomString.make(8);
+    }
+
+    public static String getRandomFromArray(String[] array) {
+        int rnd = new Random().nextInt(array.length);
+        return array[rnd];
     }
 }
