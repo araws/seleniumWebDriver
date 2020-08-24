@@ -6,7 +6,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "src/Cucumber?Features/my-store-change-user-info.feature",
+        features = "src/Cucumber/Features/my-store-change-user-info.feature",
         plugin = {"pretty", "html:out"}
 )
 
