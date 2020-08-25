@@ -8,12 +8,19 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import pages.CreateNewAccountPage;
+import pages.IndexPage;
+import pages.LoginPage;
 
 import java.util.Random;
 
 public class MyStoreTest {
 
     private WebDriver driver;
+
+    IndexPage indexPage;
+    LoginPage loginPage;
+    CreateNewAccountPage createNewAccountPage;
 
     String randomEmail = randomString() + "@o2.pl";
 
@@ -58,13 +65,16 @@ public class MyStoreTest {
 
     @Test
     public void createNewAccountTest() {
-        WebElement singInElement = driver.findElement(By.xpath("//*[@id='_desktop_user_info']/div/a/span"));
-        singInElement.click();
-        Assert.assertEquals("Log in to your account", driver.findElement(By.xpath("//*[@id='main']/header/h1")).getText());
 
-        WebElement createAccountElement = driver.findElement(By.xpath("//*[@id='content']/div/a"));
-        createAccountElement.click();
-        Assert.assertEquals("Create an account", driver.findElement(By.xpath("//*[@id='main']/header/h1")).getText());
+        indexPage = new IndexPage(driver);
+        loginPage = new LoginPage(driver);
+        createNewAccountPage = new CreateNewAccountPage(driver);
+
+        indexPage.goToLoginPage();
+        Assert.assertEquals("Log in to your account", loginPage.getPageHeader());
+
+        loginPage.goToCreateNewAccountPage();
+        Assert.assertEquals("Create an account", createNewAccountPage.getPageHeader());
 
         WebElement firstNameElement = driver.findElement(By.name("firstname"));
         firstNameElement.sendKeys(getRandomFromArray(names));

@@ -18,8 +18,14 @@ public class LoginPage {
     @FindBy(id = "submit-login")
     private WebElement singInButton;
 
+    @FindBy(xpath = "//*[@id='content']/div/a")
+    private WebElement createAccountElement;
+
     @FindBy(xpath = "//a[@class='account']")
     private WebElement userName;
+
+    @FindBy(xpath = "//*[@id='main']/header/h1")
+    private WebElement pageHeader;
 
     public LoginPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -38,7 +44,15 @@ public class LoginPage {
         singInButton.click();
     }
 
+    public void goToCreateNewAccountPage(){
+        createAccountElement.click();
+    }
+
     public String getLoggedUserName(){
         return userName.getText();
+    }
+
+    public String getPageHeader(){
+        return pageHeader.getText();
     }
 }
