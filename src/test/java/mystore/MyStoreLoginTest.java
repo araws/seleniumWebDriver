@@ -30,24 +30,24 @@ public class MyStoreLoginTest {
     @Test
     public void loginWithProperDataNoPageObject() {
         WebElement emailInputField = driver.findElement(By.name("email"));
-        emailInputField.sendKeys("johnd@mail.com");
+        emailInputField.sendKeys("ebkbdkmzbfmyljlrhl@kiabws.online");
 
         WebElement passwordInputField = driver.findElement(By.name("password"));
-        passwordInputField.sendKeys("qwerty");
+        passwordInputField.sendKeys("qwe123");
 
         driver.findElement(By.id("submit-login")).click();
 
         WebElement userFullNameLabel = driver.findElement(By.xpath("//*[@id='_desktop_user_info']/div/a[2]/span"));
-        Assert.assertEquals("John Doe", userFullNameLabel.getText());
+        Assert.assertEquals("Andrzej Rawski", userFullNameLabel.getText());
     }
 
     @Test
     public void loginWithProperDataPOP() {
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.loginAs("johnd@mail.com", "qwerty");
+        loginPage.loginAs("ebkbdkmzbfmyljlrhl@kiabws.online", "qwe123");
 
         String userName = loginPage.getLoggedUserName();
-        Assert.assertEquals("John Doe", userName);
+        Assert.assertEquals("Andrzej Rawski", userName);
     }
 
     @After

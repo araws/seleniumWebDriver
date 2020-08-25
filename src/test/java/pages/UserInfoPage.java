@@ -45,7 +45,7 @@ public class UserInfoPage {
     }
 
     public void submitUserInfo() {
-        passwordInput.sendKeys("qwerty");
+        passwordInput.sendKeys("qwe123");
         submitButton.click();
     }
 
