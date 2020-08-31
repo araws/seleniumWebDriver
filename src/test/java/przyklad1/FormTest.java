@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
+import static org.junit.Assert.*;
+
 public class FormTest {
 
     private WebDriver driver;
@@ -46,7 +48,11 @@ public class FormTest {
         String name = "Karol";
         if (firstNameElement.isEnabled()) {
             firstNameElement.sendKeys(name);
-            System.out.println(firstNameHeader.getText() + " : " + name);
+            System.out.println(firstNameHeader.getText() + " : " + firstNameElement.getAttribute("value"));
+            assertEquals(name, firstNameElement.getAttribute("value"));
+        }
+        else {
+            fail("firstNameElement is not enabled");
         }
     }
 
@@ -56,7 +62,11 @@ public class FormTest {
         String surname = "Kowalski";
         if (lastNameElement.isDisplayed()) {
             lastNameElement.sendKeys(surname);
-            System.out.println(lastNameHeader.getText() + " : " + surname);
+            System.out.println(lastNameHeader.getText() + " : " + lastNameElement.getAttribute("value"));
+            assertEquals(surname, lastNameElement.getAttribute("value"));
+        }
+        else {
+            fail("lastNameElement is not enabled");
         }
     }
 
@@ -78,6 +88,9 @@ public class FormTest {
         if (radioButtonMale.isEnabled()) {
             radioButtonMale.click();
             System.out.println(genderHeader.getText() + " : " + radioButtonMale.getText());
+            assertTrue(radioButtonMale.isSelected());
+            WebElement maleRadioLabel = driver.findElement(By.xpath("//*[@id='infoForm']/div[3]/div/div/label[1]"));
+            assertEquals("Male", maleRadioLabel.getText());
         }
         if (radioButtonMale.isSelected()) {
             System.out.println("Radio Button Male is selected");
