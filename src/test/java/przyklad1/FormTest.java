@@ -168,5 +168,7 @@ public class FormTest {
     private void submitForm() {
         WebElement submitElement = driver.findElement(By.id("submit"));
         submitElement.click();
+        WebElement successfullySubmittedMessage = driver.findElement(By.id("submit-msg"));
+        assertEquals("Successfully submitted!", successfullySubmittedMessage.getText());
     }
 }
