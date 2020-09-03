@@ -18,7 +18,7 @@ Feature: Log in, add new address and delete it
     And Data is correct in new address
     When User clicks Delete button in new address
     Then User sees "Address successfully deleted!" on page
-    And There is only one previous made address on page
+    And Created Address is deleted
     Examples:
       | alias   | address     | city    | zip    | phone     |
       | alias 1 | Kopernika 2 | Gliwice | 44-100 | 999999999 |

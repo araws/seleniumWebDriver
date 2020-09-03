@@ -109,9 +109,10 @@ public class MyStoreAddAddress {
 
     @When("^User clicks Delete button in new address$")
     public void userClicksDeleteButtonInNewAddress() {
+        yourAddressesPage.deleteCreatedSecondAddress();
     }
 
-    @And("^There is only one previous made address on page$")
-    public void thereIsOnlyOnePreviousMadeAddressOnPage() {
+    @And("^Created Address is deleted$")
+    public void createdAddressIsDeleted() {
     }
 }

@@ -17,6 +17,9 @@ public class YourAddressesPage {
     @FindBy(css = ".alert li")
     private WebElement successInformation;
 
+    @FindBy(css = "[data-link-action='delete-address']:last-of-type")
+    private WebElement deleteSecondAddressButton;
+
     public YourAddressesPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -32,5 +35,9 @@ public class YourAddressesPage {
 
     public String getUpdateInformation() {
         return successInformation.getText();
+    }
+
+    public void deleteCreatedSecondAddress(){
+        deleteSecondAddressButton.click();
     }
 }
