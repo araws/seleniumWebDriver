@@ -14,6 +14,9 @@ public class YourAddressesPage {
     @FindBy(css = ".addresses-footer span")
     private WebElement createNewAddressButton;
 
+    @FindBy(css = ".alert li")
+    private WebElement successInformation;
+
     public YourAddressesPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -25,5 +28,9 @@ public class YourAddressesPage {
 
     public String getPageHeader() {
         return pageHeader.getText();
+    }
+
+    public String getUpdateInformation() {
+        return successInformation.getText();
     }
 }

@@ -24,6 +24,12 @@ public class NewAddressPage {
     @FindBy(name = "postcode")
     private WebElement zipField;
 
+    @FindBy(css = "select.form-control")
+    private WebElement countryDropList;
+
+    @FindBy(css = "input[name='phone']")
+    private WebElement phoneField;
+
     @FindBy(xpath = "//*[@id='content']//button")
     private WebElement saveButton;
 
@@ -54,6 +60,16 @@ public class NewAddressPage {
     public void inputZip(String zip){
         zipField.clear();
         zipField.sendKeys(zip);
+    }
+
+    public void chooseUKFromCountryList(){
+        countryDropList.click();
+        countryDropList.sendKeys("u");
+    }
+
+    public void inputPhone(String phone) {
+        phoneField.clear();
+        phoneField.sendKeys(phone);
     }
 
     public void saveAddress(){

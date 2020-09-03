@@ -1,6 +1,5 @@
 package mystore;
 
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -52,6 +51,7 @@ public class MyStoreAddAddress {
     @Then("^User clicks Addresses button and goes to Your addresses page$")
     public void userClicksAddressesButton() {
         yourAccountPage.goToYourAddressesPage();
+        yourAddressesPage = new YourAddressesPage(driver);
         Assert.assertEquals("Your addresses", yourAddressesPage.getPageHeader());
     }
 
@@ -63,47 +63,44 @@ public class MyStoreAddAddress {
     }
 
     @And("^User fills Alias \"([^\"]*)\" in form$")
-    public void userFillsAliasInForm(String arg0) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    public void userFillsAliasInForm(String alias) {
+        newAddressPage.inputAlias(alias);
     }
 
     @And("^User fills Address \"([^\"]*)\" in form$")
-    public void userFillsAddressInForm(String arg0) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    public void userFillsAddressInForm(String address) {
+        newAddressPage.inputAddress(address);
     }
 
     @And("^User fills City \"([^\"]*)\" in form$")
-    public void userFillsCityInForm(String arg0) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    public void userFillsCityInForm(String city) {
+        newAddressPage.inputCity(city);
     }
 
     @And("^User fills Zip \"([^\"]*)\" in form$")
-    public void userFillsZipInForm(String arg0) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    public void userFillsZipInForm(String zip) {
+        newAddressPage.inputZip(zip);
     }
 
     @And("^User chooses Country from list$")
     public void userChoosesCountryFromList() {
+        newAddressPage.chooseUKFromCountryList();
     }
 
     @And("^User fills Phone \"([^\"]*)\" in form$")
-    public void userFillsPhoneInForm(String arg0) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    public void userFillsPhoneInForm(String phone) {
+        newAddressPage.inputPhone(phone);
     }
 
     @And("^User clicks Save button in form$")
     public void userClicksSaveButtonInForm() {
+        newAddressPage.saveAddress();
     }
 
     @Then("^User sees \"([^\"]*)\" on page$")
-    public void userSeesOnPage(String arg0) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    public void userSeesOnPage(String message) {
+        yourAddressesPage.getUpdateInformation();
+        Assert.assertEquals("Address successfully added!", yourAddressesPage.getUpdateInformation());
     }
 
     @And("^Data is correct in new address$")
