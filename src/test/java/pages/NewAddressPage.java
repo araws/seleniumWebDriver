@@ -9,6 +9,9 @@ public class NewAddressPage {
 
     private WebDriver driver;
 
+    @FindBy(css = "#main h1")
+    private WebElement pageHeader;
+
     @FindBy(name = "alias")
     private WebElement aliasField;
 
@@ -27,6 +30,10 @@ public class NewAddressPage {
     public NewAddressPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
+    }
+
+    public String getPageHeader() {
+        return pageHeader.getText();
     }
 
     public void inputAlias(String alias){
