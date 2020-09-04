@@ -39,6 +39,7 @@ public class MyStoreShoppingPathTest {
         goToMainPageTest();
         searchProductTest();
         goToHummingbirdPrintedSweaterPageTest();
+        chooseSizeTest();
     }
 
     public void userGoesToLoginPage() {
@@ -71,6 +72,20 @@ public class MyStoreShoppingPathTest {
         hummingbirdPrintedSweaterPage = new HummingbirdPrintedSweaterPage(driver);
         assertEquals(productName, hummingbirdPrintedSweaterPage.getProductNameHeader());
     }
+
+    public void chooseSizeTest() {
+        hummingbirdPrintedSweaterPage.chooseSize("M");
+//        assertEquals("M", driver.findElement(By.cssSelector("form select option[selected]")).getText());
+    }
+
+    public void setQuantityTest(){
+        hummingbirdPrintedSweaterPage.setQuantity("5");
+    }
+
+    public void addToCartTest(){
+        hummingbirdPrintedSweaterPage.addToCart();
+    }
+
 
     @After
     public void tearDown() {
