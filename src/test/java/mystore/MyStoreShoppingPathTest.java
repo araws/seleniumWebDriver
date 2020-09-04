@@ -1,15 +1,16 @@
 package mystore;
 
-import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import pages.HummingbirdPrintedSweaterPage;
-import pages.IndexPage;
-import pages.LoginPage;
-import pages.YourAccountPage;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.*;
+
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
 
@@ -19,7 +20,11 @@ public class MyStoreShoppingPathTest {
     LoginPage loginPage;
     YourAccountPage yourAccountPage;
     IndexPage indexPage;
-    HummingbirdPrintedSweaterPage hummingbirdPrintedSweaterPage;
+    HummingbirdPrintedSweaterPageS hummingbirdPrintedSweaterPageS;
+    HummingbirdPrintedSweaterPageM hummingbirdPrintedSweaterPageM;
+    ShoppingCartPage shoppingCartPage;
+    OrderPage orderPage;
+
     private String productName;
 
     @Before
@@ -33,13 +38,22 @@ public class MyStoreShoppingPathTest {
     }
 
     @Test
-    public void myStoreShoppingPathTest(){
+    public void myStoreShoppingPathTest() {
         userGoesToLoginPage();
         loginWithProperDataPOP();
         goToMainPageTest();
         searchProductTest();
         goToHummingbirdPrintedSweaterPageTest();
         chooseSizeTest();
+        setQuantityTest();
+        addToCartTest();
+        proceedToCheckoutTest();
+        goToOrderPageTest();
+        acceptAddressTest();
+        acceptDeliveryOptionTest();
+        choosePayByCheckOptionTest();
+        agreeToTermsTest();
+        orderTest();
     }
 
     public void userGoesToLoginPage() {
@@ -69,26 +83,63 @@ public class MyStoreShoppingPathTest {
 
     public void goToHummingbirdPrintedSweaterPageTest() {
         indexPage.goToHummingbirdPrintedSweaterPage();
-        hummingbirdPrintedSweaterPage = new HummingbirdPrintedSweaterPage(driver);
-        assertEquals(productName, hummingbirdPrintedSweaterPage.getProductNameHeader());
+        hummingbirdPrintedSweaterPageS = new HummingbirdPrintedSweaterPageS(driver);
+        assertEquals(productName, hummingbirdPrintedSweaterPageS.getProductNameHeader());
     }
 
     public void chooseSizeTest() {
-        hummingbirdPrintedSweaterPage.chooseSize("M");
+        hummingbirdPrintedSweaterPageS.chooseSize("M");
+        hummingbirdPrintedSweaterPageM = new HummingbirdPrintedSweaterPageM(driver);
+//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 //        assertEquals("M", driver.findElement(By.cssSelector("form select option[selected]")).getText());
     }
 
-    public void setQuantityTest(){
-        hummingbirdPrintedSweaterPage.setQuantity("5");
+    public void setQuantityTest() {
+        hummingbirdPrintedSweaterPageM.setQuantity("5");
+        WebDriverWait wait = new WebDriverWait(driver, 30);
+        wait.until(ExpectedConditions.attributeToBe(driver.findElement(By.id("quantity_wanted")), "value", "5"));
     }
 
-    public void addToCartTest(){
-        hummingbirdPrintedSweaterPage.addToCart();
+    public void addToCartTest() {
+//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        hummingbirdPrintedSweaterPageM.addToCart();
+//        assertEquals("Product successfully added to your shopping cart",
+//                hummingbirdPrintedSweaterPageM.getProductAddedInformation());
     }
 
-
-    @After
-    public void tearDown() {
-        driver.quit();
+    public void proceedToCheckoutTest() {
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        hummingbirdPrintedSweaterPageM.proceedToCheckout();
     }
+
+    public void goToOrderPageTest() {
+        shoppingCartPage = new ShoppingCartPage(driver);
+        shoppingCartPage.goToOrderPage();
+    }
+
+    public void acceptAddressTest(){
+        orderPage = new OrderPage(driver);
+        orderPage.acceptAddress();
+    }
+
+    public void acceptDeliveryOptionTest(){
+        orderPage.acceptDeliveryOption();
+    }
+
+    public void choosePayByCheckOptionTest(){
+        orderPage.choosePayByCheckOption();
+    }
+
+    public void agreeToTermsTest(){
+        orderPage.agreeToTerms();
+    }
+
+    public void orderTest(){
+        orderPage.order();
+    }
+
+//    @After
+//    public void tearDown() {
+//        driver.quit();
+//    }
 }
