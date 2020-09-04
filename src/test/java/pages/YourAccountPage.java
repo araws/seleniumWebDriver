@@ -11,6 +11,9 @@ public class YourAccountPage {
     @FindBy(css = "#addresses-link span")
     private WebElement addressesButton;
 
+    @FindBy(css = ".logo")
+    private WebElement myStoreButton;
+
     @FindBy(css = "#main h1")
     private WebElement pageHeader;
 
@@ -21,6 +24,10 @@ public class YourAccountPage {
 
     public void goToYourAddressesPage(){
         addressesButton.click();
+    }
+
+    public void goToMainPage(){
+        myStoreButton.click();
     }
 
     public String getPageHeader(){
