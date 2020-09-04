@@ -12,16 +12,16 @@ public class NewAddressPage {
     @FindBy(css = "#main h1")
     private WebElement pageHeader;
 
-    @FindBy(name = "alias")
+    @FindBy(css = "input[name=alias]")
     private WebElement aliasField;
 
-    @FindBy(name = "address1")
+    @FindBy(css = "input[name=address1]")
     private WebElement addressField;
 
-    @FindBy(name = "city")
+    @FindBy(css = "input[name=city]")
     private WebElement cityField;
 
-    @FindBy(name = "postcode")
+    @FindBy(css = "input[name=postcode]")
     private WebElement zipField;
 
     @FindBy(css = "select.form-control")

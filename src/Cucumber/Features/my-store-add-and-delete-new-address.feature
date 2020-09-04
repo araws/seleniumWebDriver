@@ -14,11 +14,11 @@ Feature: Log in, add new address and delete it
     And User chooses Country from list
     And User fills Phone "<phone>" in form
     And User clicks Save button in form
-    Then User sees "Address successfully added" on page
-    And Data is correct in new address
+    Then User sees "Address successfully added!" on page
+    And Data is correct in created Address "<alias>", "<address>", "<city>", "<zip>", "<phone>"
     When User clicks Delete button in new address
-    Then User sees "Address successfully deleted!" on page
-    And Created Address is deleted
+    Then User sees "Address successfully deleted!" on page and Created Address is deleted
+    And closes Chrome.
     Examples:
       | alias   | address     | city    | zip    | phone     |
       | alias 1 | Kopernika 2 | Gliwice | 44-100 | 999999999 |

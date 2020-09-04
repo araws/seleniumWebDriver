@@ -20,6 +20,7 @@ public class MyStoreAddAddress {
     YourAccountPage yourAccountPage;
     YourAddressesPage yourAddressesPage;
     NewAddressPage newAddressPage;
+    UpdateYourAddressPage updateYourAddressPage;
 
 
     @Given("^User is created in to CodersLab shop, one address is created and User is logged out$")
@@ -99,12 +100,22 @@ public class MyStoreAddAddress {
 
     @Then("^User sees \"([^\"]*)\" on page$")
     public void userSeesOnPage(String message) {
-        yourAddressesPage.getUpdateInformation();
-        Assert.assertEquals("Address successfully added!", yourAddressesPage.getUpdateInformation());
+        yourAddressesPage.getAddressCreatedInformation();
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        Assert.assertEquals(message, yourAddressesPage.getAddressCreatedInformation());
     }
 
-    @And("^Data is correct in new address$")
-    public void dataIsCorrectInNewAddress() {
+    @And("^Data is correct in created Address \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\", \"([^\"]*)\"$")
+    public void dataIsCorrectInCreatedAddress(String alias, String address, String city, String zip, String phone) {
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        yourAddressesPage.editCreatedSecondAddress();
+        updateYourAddressPage = new UpdateYourAddressPage(driver);
+        Assert.assertEquals(alias, updateYourAddressPage.getAliasValue());
+        Assert.assertEquals(address, updateYourAddressPage.getAddressValue());
+        Assert.assertEquals(city, updateYourAddressPage.getCityValue());
+        Assert.assertEquals(zip, updateYourAddressPage.getZipValue());
+        Assert.assertEquals(phone, updateYourAddressPage.getPhoneValue());
+        updateYourAddressPage.saveAddress();
     }
 
     @When("^User clicks Delete button in new address$")
@@ -112,7 +123,13 @@ public class MyStoreAddAddress {
         yourAddressesPage.deleteCreatedSecondAddress();
     }
 
-    @And("^Created Address is deleted$")
-    public void createdAddressIsDeleted() {
+    @Then("^User sees \"([^\"]*)\" on page and Created Address is deleted$")
+    public void userSeesMessageOnPage(String message) {
+        Assert.assertEquals(message, yourAddressesPage.getAddressDeletedInformation());
+    }
+
+    @And("^closes Chrome\\.$")
+    public void tearDown() {
+        driver.quit();
     }
 }

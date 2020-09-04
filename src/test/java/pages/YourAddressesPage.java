@@ -17,8 +17,11 @@ public class YourAddressesPage {
     @FindBy(css = ".alert li")
     private WebElement successInformation;
 
-    @FindBy(css = "[data-link-action='delete-address']:last-of-type")
+    @FindBy(css = "#content div:nth-child(3) article a:last-child span")
     private WebElement deleteSecondAddressButton;
+
+    @FindBy(css = "#content div:nth-child(3) article a:first-child span")
+    private WebElement editSecondAddressButton;
 
     public YourAddressesPage(WebDriver driver) {
         this.driver = driver;
@@ -33,11 +36,19 @@ public class YourAddressesPage {
         return pageHeader.getText();
     }
 
-    public String getUpdateInformation() {
+    public String getAddressCreatedInformation() {
+        return successInformation.getText();
+    }
+
+    public String getAddressDeletedInformation() {
         return successInformation.getText();
     }
 
     public void deleteCreatedSecondAddress(){
         deleteSecondAddressButton.click();
+    }
+
+    public void editCreatedSecondAddress(){
+        editSecondAddressButton.click();
     }
 }
