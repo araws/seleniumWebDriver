@@ -1,10 +1,12 @@
 package mystore;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import pages.HummingbirdPrintedSweaterPage;
 import pages.IndexPage;
 import pages.LoginPage;
 import pages.YourAccountPage;
@@ -17,6 +19,8 @@ public class MyStoreShoppingPathTest {
     LoginPage loginPage;
     YourAccountPage yourAccountPage;
     IndexPage indexPage;
+    HummingbirdPrintedSweaterPage hummingbirdPrintedSweaterPage;
+    private String productName;
 
     @Before
     public void setUp() throws Exception {
@@ -29,6 +33,21 @@ public class MyStoreShoppingPathTest {
     }
 
     @Test
+    public void myStoreShoppingPathTest(){
+        userGoesToLoginPage();
+        loginWithProperDataPOP();
+        goToMainPageTest();
+        searchProductTest();
+        goToHummingbirdPrintedSweaterPageTest();
+    }
+
+    public void userGoesToLoginPage() {
+        indexPage = new IndexPage(driver);
+        indexPage.goToLoginPage();
+        loginPage = new LoginPage(driver);
+        Assert.assertEquals("Log in to your account", loginPage.getPageHeader());
+    }
+
     public void loginWithProperDataPOP() {
         loginPage = new LoginPage(driver);
         loginPage.loginAs("ebkbdkmzbfmyljlrhl@kiabws.online", "qwe123");
@@ -37,19 +56,20 @@ public class MyStoreShoppingPathTest {
         assertEquals("Andrzej Rawski", userName);
     }
 
-    @Test
-    public void goToMainPageTest(){
+    public void goToMainPageTest() {
+        yourAccountPage = new YourAccountPage(driver);
         yourAccountPage.goToMainPage();
     }
 
-    @Test
-    public void searchProductTest(){
-        indexPage.searchProduct("Hummingbird Printed Sweater");
+    public void searchProductTest() {
+        productName = "HUMMINGBIRD PRINTED SWEATER";
+        indexPage.searchProduct(productName);
     }
 
-    @Test
-    public void goToHummingbirdPrintedSweaterPageTest(){
+    public void goToHummingbirdPrintedSweaterPageTest() {
         indexPage.goToHummingbirdPrintedSweaterPage();
+        hummingbirdPrintedSweaterPage = new HummingbirdPrintedSweaterPage(driver);
+        assertEquals(productName, hummingbirdPrintedSweaterPage.getProductNameHeader());
     }
 
     @After
