@@ -1,15 +1,20 @@
 package mystore;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.*;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
@@ -38,7 +43,7 @@ public class MyStoreShoppingPathTest {
     }
 
     @Test
-    public void myStoreShoppingPathTest() {
+    public void myStoreShoppingPathTest() throws IOException {
         userGoesToLoginPage();
         loginWithProperDataPOP();
         goToMainPageTest();
@@ -54,6 +59,7 @@ public class MyStoreShoppingPathTest {
         choosePayByCheckOptionTest();
         agreeToTermsTest();
         orderTest();
+        takeScreenShot();
     }
 
     public void userGoesToLoginPage() {
@@ -136,6 +142,14 @@ public class MyStoreShoppingPathTest {
 
     public void orderTest(){
         orderPage.order();
+    }
+
+    public String takeScreenShot() throws IOException {
+        String path;
+        File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        path = ".target/screenshots/" + scrFile.getName();
+        FileUtils.copyFile(scrFile, new File(path));
+        return path;
     }
 
 //    @After
