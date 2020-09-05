@@ -4,6 +4,9 @@
 - Java
 - Selenium WebDriver
 - Cucumber
+- BDD
+- Page Object Pattern
+- Page Factory
 
 - IntelliJ Idea
 
