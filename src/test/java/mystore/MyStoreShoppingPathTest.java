@@ -96,12 +96,22 @@ public class MyStoreShoppingPathTest {
     public void chooseSizeTest() {
         hummingbirdPrintedSweaterPageS.chooseSize("M");
         hummingbirdPrintedSweaterPageM = new HummingbirdPrintedSweaterPageM(driver);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 //        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 //        assertEquals("M", driver.findElement(By.cssSelector("form select option[selected]")).getText());
     }
 
     public void setQuantityTest() {
         hummingbirdPrintedSweaterPageM.setQuantity("5");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         WebDriverWait wait = new WebDriverWait(driver, 30);
         wait.until(ExpectedConditions.attributeToBe(driver.findElement(By.id("quantity_wanted")), "value", "5"));
     }
