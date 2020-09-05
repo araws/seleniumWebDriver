@@ -1,6 +1,7 @@
 package mystore;
 
 import org.apache.commons.io.FileUtils;
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,6 +40,7 @@ public class MyStoreShoppingPathTest {
 
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get("https://prod-kurs.coderslab.pl/index.php");
     }
 
@@ -101,8 +103,7 @@ public class MyStoreShoppingPathTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//        assertEquals("M", driver.findElement(By.cssSelector("form select option[selected]")).getText());
+        assertEquals("M", driver.findElement(By.cssSelector("form select option[selected]")).getText());
     }
 
     public void setQuantityTest() {
@@ -117,14 +118,12 @@ public class MyStoreShoppingPathTest {
     }
 
     public void addToCartTest() {
-//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         hummingbirdPrintedSweaterPageM.addToCart();
 //        assertEquals("Product successfully added to your shopping cart",
 //                hummingbirdPrintedSweaterPageM.getProductAddedInformation());
     }
 
     public void proceedToCheckoutTest() {
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         hummingbirdPrintedSweaterPageM.proceedToCheckout();
     }
 
@@ -162,8 +161,8 @@ public class MyStoreShoppingPathTest {
         return path;
     }
 
-//    @After
-//    public void tearDown() {
-//        driver.quit();
-//    }
+    @After
+    public void tearDown() {
+        driver.quit();
+    }
 }
